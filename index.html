@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرب تاق | 3rb tag V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #05070c;
+      --panel-bg: rgba(13, 17, 23, 0.75);
+      --neon-green: #00ff88;
+      --neon-green-glow: rgba(0, 255, 136, 0.4);
+      --neon-red: #ff3366;
+      --neon-yellow: #ffcc00;
+      --tiktok-pink: #ff0050;
+      --tiktok-blue: #00f2fe;
+      --tiktok-glow: rgba(255, 0, 80, 0.4);
+      --coffee-orange: #ffdd00;
+      --coffee-glow: rgba(255, 221, 0, 0.4);
+      --text-main: #ffffff;
+      --text-muted: #8b949e;
+      --border-glow: rgba(0, 255, 136, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; user-select: none; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .bg-grid {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px; z-index: -2;
+    }
+
+    .bg-glow {
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
+      filter: blur(140px); z-index: -1; animation: pulseGlow 8s infinite alternate ease-in-out;
+    }
+    .glow-1 { top: -100px; right: -100px; background: var(--neon-green-glow); }
+    .glow-2 { bottom: -150px; left: -100px; background: var(--tiktok-glow); }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+      100% { transform: scale(1.2) translate(-30px, 30px); opacity: 0.8; }
+    }
+
+    header {
+      width: 100%; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(5, 7, 12, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 14px; }
+    .logo-badge {
+      background: linear-gradient(135deg, var(--neon-green), #00b359);
+      color: #000; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem;
+      padding: 8px 16px; border-radius: 12px; box-shadow: 0 0 20px var(--neon-green-glow);
+    }
+    .logo-text { font-size: 1.6rem; font-weight: 900; }
+
+    .server-status { display: flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    .status-online { background: rgba(0, 255, 136, 0.08); border: 1px solid var(--neon-green); color: var(--neon-green); }
+    .status-online .status-dot { background-color: var(--neon-green); box-shadow: 0 0 12px var(--neon-green); animation: blink 1.5s infinite; }
+
+    .status-offline { background: rgba(255, 51, 102, 0.08); border: 1px solid var(--neon-red); color: var(--neon-red); }
+    .status-offline .status-dot { background-color: var(--neon-red); box-shadow: 0 0 12px var(--neon-red); }
+
+    .status-maintenance { background: rgba(255, 204, 0, 0.08); border: 1px solid var(--neon-yellow); color: var(--neon-yellow); }
+    .status-maintenance .status-dot { background-color: var(--neon-yellow); box-shadow: 0 0 12px var(--neon-yellow); animation: blink 1s infinite; }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    main {
+      flex: 1; width: 100%; max-width: 1400px; margin: 0 auto; padding: 40px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+    }
+
+    .tag-v2 {
+      display: inline-block; background: linear-gradient(90deg, var(--tiktok-pink), var(--neon-red));
+      color: #fff; font-weight: 800; padding: 6px 18px; border-radius: 8px; font-size: 0.95rem; margin-bottom: 16px;
+      box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+    }
+
+    .hero-title {
+      font-size: 3.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--neon-green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-box {
+      background: var(--panel-bg); border: 1px solid var(--border-glow); backdrop-filter: blur(16px);
+      padding: 20px; border-radius: 16px; text-align: center;
+    }
+    
+    .stat-val { 
+      font-family: 'Cairo', 'Orbitron', sans-serif; 
+      font-size: 1.7rem; 
+      font-weight: 900; 
+      color: var(--neon-green); 
+    }
+    
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+    .actions-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .action-card {
+      background: var(--panel-bg); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
+      border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px; padding: 20px 28px;
+      border-radius: 16px; font-size: 1.25rem; font-weight: 800; text-decoration: none; transition: all 0.3s ease;
+      cursor: pointer; border: none;
+    }
+
+    .btn-primary { background: var(--neon-green); color: #05070c; box-shadow: 0 0 30px var(--neon-green-glow); }
+    .btn-primary:hover { transform: translateY(-4px); background: #00ff95; }
+
+    .btn-disabled {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #666 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    .btn-tiktok {
+      background: linear-gradient(135deg, rgba(255, 0, 80, 0.15), rgba(0, 242, 254, 0.15));
+      border: 1.5px solid var(--tiktok-pink); color: #ffffff;
+    }
+    .btn-tiktok:hover { transform: translateY(-4px); background: linear-gradient(135deg, var(--tiktok-pink), var(--tiktok-blue)); }
+
+    /* زر الدعم الجديد */
+    .btn-support {
+      background: rgba(255, 221, 0, 0.1);
+      border: 1.5px solid var(--coffee-orange);
+      color: var(--coffee-orange);
+      box-shadow: 0 0 20px rgba(255, 221, 0, 0.15);
+    }
+    .btn-support:hover {
+      transform: translateY(-4px);
+      background: var(--coffee-orange);
+      color: #05070c;
+      box-shadow: 0 0 35px var(--coffee-glow);
+    }
+
+    .info-list {
+      display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .info-item { display: flex; justify-content: space-between; font-size: 0.95rem; }
+    .info-item span:first-child { color: var(--text-muted); }
+    .info-item span:last-child { font-weight: 700; color: #fff; }
+
+    footer { width: 100%; padding: 20px 40px; text-align: center; font-size: 0.9rem; color: var(--text-muted); background: rgba(5, 7, 12, 0.8); }
+
+    @media (max-width: 968px) {
+      main { grid-template-columns: 1fr; padding: 24px; }
+      .hero-title { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo-badge">3RB</div>
+      <div class="logo-text">عرب تاق</div>
+    </div>
+    <div class="server-status" id="headerServerStatus">
+      <span class="status-dot"></span>
+      <span id="headerStatusText">جاري الفحص...</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <span class="tag-v2">🚫 لا أسامح ولا أحلل أي أحد يسوي تعديل أو Modding في لعبتي بدون إذن 🚫</span>
+      <h1 class="hero-title">3rb tag VR</h1>
+      <p class="hero-desc">أقوى لعبة عربية مخصصة لنظارات Meta Quest 3 & 3S.</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-val" id="download-count">...</div>
+          <div class="stat-lbl">إجمالي التنزيلات</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="cardServerStatus">...</div>
+          <div class="stat-lbl">حالة السيرفر</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">v2.0</div>
+          <div class="stat-lbl">الإصدار الحالي</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="actions-sidebar">
+      <div class="action-card">
+        
+        <!-- زر التحميل المباشر -->
+        <button class="btn btn-primary" id="downloadBtn" onclick="handleDownload()">
+          <span id="btnText">🚀 تنزيل لعبة 3rb tag (APK)</span>
+        </button>
+
+        <!-- زر حساب التيك توك -->
+        <a href="https://www.tiktok.com/@mbrmj_vr67" target="_blank" class="btn btn-tiktok">
+          <span>🎵 حسابي تيك (الدعم والمشاكل)</span>
+        </a>
+
+        <!-- زر ادعمني ❤️ الجديد -->
+        <a href="https://buymeacoffee.com/mbrmj_vr67" target="_blank" class="btn btn-support">
+          <span>☕ ادعمني ❤️</span>
+        </a>
+
+        <div class="info-list">
+          <div class="info-item"><span>اسم الملف</span><span>3rb tag.apk</span></div>
+          <div class="info-item"><span>الأجهزة المدعومة</span><span>Meta Quest 3 / 3S</span></div>
+          <div class="info-item"><span>المطور الرئيسي</span><span>mbrmj_vr67</span></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>تطوير وبرمجة mbrmj_vr67 © 2026</footer>
+
+  <script>
+    let isServerOnline = false;
+
+    async function fetchStatus() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        
+        document.getElementById('download-count').innerText = data.downloads.toLocaleString();
+        
+        const headerStatus = document.getElementById('headerServerStatus');
+        const headerStatusText = document.getElementById('headerStatusText');
+        const cardServerStatus = document.getElementById('cardServerStatus');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const btnText = document.getElementById('btnText');
+
+        if (data.status === 'online') {
+          isServerOnline = true;
+          headerStatus.className = "server-status status-online";
+          headerStatusText.innerText = "السيرفر شغال 100%";
+          cardServerStatus.innerText = "شغال";
+          cardServerStatus.style.color = "var(--neon-green)";
+          downloadBtn.className = "btn btn-primary";
+          btnText.innerText = "🚀 تنزيل لعبة 3rb tag (APK)";
+        } else if (data.status === 'offline') {
+          isServerOnline = false;
+          headerStatus.className = "server-status status-offline";
+          headerStatusText.innerText = "السيرفر متعطل حالياً";
+          cardServerStatus.innerText = "متعطل";
+          cardServerStatus.style.color = "var(--neon-red)";
+          downloadBtn.className = "btn btn-disabled";
+          btnText.innerText = "❌ السيرفر متعطل - التحميل موقف";
+        } else {
+          isServerOnline = false;
+          headerStatus.className = "server-status status-maintenance";
+          headerStatusText.innerText = "السيرفر تحت الصيانة";
+          cardServerStatus.innerText = "تحت الصيانة";
+          cardServerStatus.style.color = "var(--neon-yellow)";
+          downloadBtn.className = "btn btn-disabled";
+          btnText.innerText = "🛠️ السيرفر تحت الصيانة - التحميل موقف";
+        }
+      } catch (err) {
+        console.error("فشل الاتصال بالسيرفر:", err);
+      }
+    }
+
+    function handleDownload() {
+      if (!isServerOnline) {
+        alert("⚠️ عذراً! السيرفر حالياً مغلق أو تحت الصيانة، لا يمكنك تحميل اللعبة الآن.");
+        return;
+      }
+      
+      window.location.href = '/api/download';
+      setTimeout(fetchStatus, 1000);
+    }
+
+    fetchStatus();
+  </script>
+
+</body>
+</html>
