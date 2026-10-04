@@ -3,30 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عرب تاق | 3rb tag V2</title>
+  <title>3rb tag VR</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900;1000&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
     :root {
-      --bg-dark: #05070c;
-      --panel-bg: rgba(13, 17, 23, 0.75);
+      --bg-dark: #030008;
+      --panel-bg: rgba(12, 10, 24, 0.55);
+      --panel-border: rgba(0, 240, 255, 0.3);
+      --neon-cyan: #00f0ff;
       --neon-green: #00ff88;
-      --neon-green-glow: rgba(0, 255, 136, 0.4);
-      --neon-red: #ff3366;
-      --neon-yellow: #ffcc00;
-      --tiktok-pink: #ff0050;
-      --tiktok-blue: #00f2fe;
-      --tiktok-glow: rgba(255, 0, 80, 0.4);
-      --coffee-orange: #ffdd00;
-      --coffee-glow: rgba(255, 221, 0, 0.4);
+      --neon-pink: #ff0055;
+      --neon-purple: #b000ff;
+      --neon-yellow: #ffe600;
+      --glow-cyan: rgba(0, 240, 255, 0.5);
+      --glow-green: rgba(0, 255, 136, 0.5);
+      --glow-pink: rgba(255, 0, 85, 0.5);
+      --glow-purple: rgba(176, 0, 255, 0.5);
       --text-main: #ffffff;
-      --text-muted: #8b949e;
-      --border-glow: rgba(0, 255, 136, 0.2);
+      --text-sub: #a0aec0;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; user-select: none; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
 
     body {
       background-color: var(--bg-dark);
@@ -40,152 +49,404 @@
       position: relative;
     }
 
-    .bg-grid {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    /* Hyper-Grid & Animated Distortion */
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 60px 60px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px; z-index: -2;
+        linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(176, 0, 255, 0.04) 1px, transparent 1px);
+      z-index: -2;
+      perspective: 800px;
+      transform: rotateX(25deg);
+      transform-origin: top;
+      opacity: 0.9;
     }
 
-    .bg-glow {
-      position: fixed; width: 600px; height: 600px; border-radius: 50%;
-      filter: blur(140px); z-index: -1; animation: pulseGlow 8s infinite alternate ease-in-out;
-    }
-    .glow-1 { top: -100px; right: -100px; background: var(--neon-green-glow); }
-    .glow-2 { bottom: -150px; left: -100px; background: var(--tiktok-glow); }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-      100% { transform: scale(1.2) translate(-30px, 30px); opacity: 0.8; }
+    .scanline {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 240, 255, 0.03) 50%, rgba(0, 240, 255, 0.03));
+      background-size: 100% 4px;
+      z-index: -1;
+      pointer-events: none;
     }
 
+    /* Ambient Glow Orbs */
+    .glow-sphere {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(150px);
+      z-index: -2;
+      animation: floatGlow 12s infinite alternate ease-in-out;
+    }
+    .glow-1 { top: -120px; right: -100px; width: 600px; height: 600px; background: var(--glow-green); }
+    .glow-2 { bottom: -150px; left: -100px; width: 650px; height: 650px; background: var(--glow-pink); }
+    .glow-3 { top: 35%; left: 30%; width: 500px; height: 500px; background: var(--glow-purple); }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      100% { transform: translate(-60px, 60px) scale(1.2); opacity: 0.8; }
+    }
+
+    /* Header Styling */
     header {
-      width: 100%; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(5, 7, 12, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(3, 0, 8, 0.6);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      z-index: 100;
     }
 
-    .logo-container { display: flex; align-items: center; gap: 14px; }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .logo-badge {
-      background: linear-gradient(135deg, var(--neon-green), #00b359);
-      color: #000; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem;
-      padding: 8px 16px; border-radius: 12px; box-shadow: 0 0 20px var(--neon-green-glow);
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      padding: 10px 22px;
+      border-radius: 14px;
+      box-shadow: 0 0 30px var(--glow-cyan), inset 0 0 10px rgba(255,255,255,0.5);
+      letter-spacing: 3px;
+      position: relative;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
     }
-    .logo-text { font-size: 1.6rem; font-weight: 900; }
 
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 1000;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #ffffff, var(--neon-cyan), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 20px var(--glow-cyan));
+    }
+
+    /* Main Grid Layout */
     main {
-      flex: 1; width: 100%; max-width: 1400px; margin: 0 auto; padding: 40px;
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+      flex: 1;
+      width: 100%;
+      max-width: 1450px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 50px;
+      align-items: center;
+      z-index: 10;
     }
 
-    .tag-v2 {
-      display: inline-block; background: linear-gradient(90deg, var(--tiktok-pink), var(--neon-red));
-      color: #fff; font-weight: 800; padding: 6px 18px; border-radius: 8px; font-size: 0.95rem; margin-bottom: 16px;
-      box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+    /* Warning Banner with Animated Cyber Outline */
+    .hero-warning {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 0, 85, 0.08);
+      border: 1px solid var(--neon-pink);
+      color: #ff80a6;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 16px;
+      font-size: 1rem;
+      margin-bottom: 28px;
+      box-shadow: 0 0 25px var(--glow-pink), inset 0 0 15px rgba(255, 0, 85, 0.1);
+      backdrop-filter: blur(15px);
+      animation: pulseBorder 2s infinite alternate;
     }
 
+    @keyframes pulseBorder {
+      0% { border-color: rgba(255, 0, 85, 0.4); box-shadow: 0 0 15px var(--glow-pink); }
+      100% { border-color: rgba(255, 0, 85, 1); box-shadow: 0 0 35px var(--glow-pink); }
+    }
+
+    /* Glitch Title & Animated Gradient */
     .hero-title {
-      font-size: 3.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--neon-green));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 5.5rem;
+      font-weight: 1000;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #ffffff 10%, var(--neon-cyan) 50%, var(--neon-green) 90%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shineGradient 4s linear infinite;
+      filter: drop-shadow(0 0 45px rgba(0, 240, 255, 0.4));
+      position: relative;
     }
 
-    .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
+    @keyframes shineGradient {
+      to { background-position: 200% center; }
+    }
 
-    .stats-row { 
-      display: grid; 
-      grid-template-columns: 2fr 1fr; 
-      gap: 16px; 
-      margin-bottom: 32px; 
+    .hero-desc {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Futuristic Cyber Glass Cards */
+    .glass-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(30px);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: 0.6s;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 40px 80px rgba(0,240,255,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
     }
 
     .support-banner-box {
-      background: rgba(255, 221, 0, 0.08);
-      border: 1px solid var(--coffee-orange);
-      backdrop-filter: blur(16px);
-      padding: 20px;
-      border-radius: 16px;
+      background: rgba(255, 230, 0, 0.03);
+      border: 1.5px solid rgba(255, 230, 0, 0.5);
+      padding: 26px 32px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.98rem;
+      gap: 20px;
+      font-size: 1.15rem;
       font-weight: 800;
-      color: var(--coffee-orange);
+      color: var(--neon-yellow);
       line-height: 1.6;
-      box-shadow: 0 0 20px rgba(255, 221, 0, 0.12);
+      box-shadow: 0 0 30px var(--glow-yellow);
+    }
+
+    .support-banner-box i {
+      font-size: 2.2rem;
+      animation: pulseHeart 1.2s infinite ease-in-out;
+      color: #ff0055;
+      filter: drop-shadow(0 0 10px #ff0055);
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.35); }
     }
 
     .stat-box {
-      background: var(--panel-bg); border: 1px solid var(--border-glow); backdrop-filter: blur(16px);
-      padding: 20px; border-radius: 16px; text-align: center;
+      padding: 26px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
     }
-    
-    .stat-val { 
-      font-family: 'Cairo', 'Orbitron', sans-serif; 
-      font-size: 1.7rem; 
-      font-weight: 900; 
-      color: var(--neon-green); 
-    }
-    
-    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
 
-    .actions-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .stat-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--neon-green);
+      text-shadow: 0 0 20px var(--glow-green);
+      letter-spacing: 1px;
+    }
+
+    .stat-lbl {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .actions-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
     .action-card {
-      background: var(--panel-bg); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
-      border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: rgba(10, 8, 22, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.25);
     }
 
+    /* Cyberpunk Interactive Buttons */
     .btn {
-      display: flex; align-items: center; justify-content: center; gap: 12px; padding: 20px 28px;
-      border-radius: 16px; font-size: 1.25rem; font-weight: 800; text-decoration: none; transition: all 0.3s ease;
-      cursor: pointer; border: none;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px 34px;
+      border-radius: 18px;
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 1;
     }
 
-    .btn-primary { background: var(--neon-green); color: #05070c; box-shadow: 0 0 30px var(--neon-green-glow); }
-    .btn-primary:hover { transform: translateY(-4px); background: #00ff95; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-green), #00a851);
+      color: #000;
+      box-shadow: 0 0 40px var(--glow-green);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 60px rgba(0, 255, 136, 0.9);
+      background: linear-gradient(135deg, #33ff9f, var(--neon-green));
+    }
 
     .btn-tiktok {
-      background: linear-gradient(135deg, rgba(255, 0, 80, 0.15), rgba(0, 242, 254, 0.15));
-      border: 1.5px solid var(--tiktok-pink); color: #ffffff;
+      background: linear-gradient(135deg, rgba(255, 0, 85, 0.2), rgba(0, 240, 255, 0.2));
+      border: 1.5px solid var(--neon-pink);
+      color: #ffffff;
+      box-shadow: 0 0 25px var(--glow-pink);
+      backdrop-filter: blur(10px);
     }
-    .btn-tiktok:hover { transform: translateY(-4px); background: linear-gradient(135deg, var(--tiktok-pink), var(--tiktok-blue)); }
+
+    .btn-tiktok:hover {
+      transform: translateY(-6px) scale(1.02);
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+      color: #000;
+      box-shadow: 0 0 50px rgba(255, 0, 85, 0.8);
+    }
 
     .btn-support {
-      background: rgba(255, 221, 0, 0.1);
-      border: 1.5px solid var(--coffee-orange);
-      color: var(--coffee-orange);
-      box-shadow: 0 0 20px rgba(255, 221, 0, 0.15);
+      background: rgba(255, 230, 0, 0.08);
+      border: 1.5px solid var(--neon-yellow);
+      color: var(--neon-yellow);
+      box-shadow: 0 0 25px var(--glow-yellow);
+      backdrop-filter: blur(10px);
     }
+
     .btn-support:hover {
-      transform: translateY(-4px);
-      background: var(--coffee-orange);
-      color: #05070c;
-      box-shadow: 0 0 35px var(--coffee-glow);
+      transform: translateY(-6px) scale(1.02);
+      background: var(--neon-yellow);
+      color: #000;
+      box-shadow: 0 0 50px rgba(255, 230, 0, 0.8);
     }
 
     .info-list {
-      display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.02);
-      border-radius: 16px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .info-item { display: flex; justify-content: space-between; font-size: 0.95rem; }
-    .info-item span:first-child { color: var(--text-muted); }
-    .info-item span:last-child { font-weight: 700; color: #fff; }
 
-    footer { width: 100%; padding: 20px 40px; text-align: center; font-size: 0.9rem; color: var(--text-muted); background: rgba(5, 7, 12, 0.8); }
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+    }
 
-    @media (max-width: 968px) {
-      main { grid-template-columns: 1fr; padding: 24px; }
-      .hero-title { font-size: 2.8rem; }
-      .stats-row { grid-template-columns: 1fr; }
+    .info-item span:first-child {
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .info-item span:last-child {
+      font-weight: 800;
+      color: var(--neon-cyan);
+      font-family: 'Rajdhani', 'Cairo', sans-serif;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px var(--glow-cyan);
+    }
+
+    footer {
+      width: 100%;
+      padding: 28px 40px;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-sub);
+      background: rgba(3, 0, 8, 0.95);
+      border-top: 1px solid rgba(0, 240, 255, 0.15);
+      backdrop-filter: blur(15px);
+      z-index: 10;
+    }
+
+    footer span {
+      color: var(--neon-green);
+      font-weight: 800;
+      text-shadow: 0 0 10px var(--glow-green);
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+      }
+      .hero-title {
+        font-size: 3.8rem;
+      }
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding: 20px 24px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-grid"></div>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
+  <div class="cyber-grid"></div>
+  <div class="scanline"></div>
+  <div class="glow-sphere glow-1"></div>
+  <div class="glow-sphere glow-2"></div>
+  <div class="glow-sphere glow-3"></div>
 
   <header>
     <div class="logo-container">
@@ -196,16 +457,21 @@
 
   <main>
     <section class="hero-section">
-      <span class="tag-v2">🚫 لا أسامح ولا أحلل أي أحد يسوي تعديل أو Modding في لعبتي بدون إذن 🚫</span>
+      <div class="hero-warning">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>🚫 لا أسامح ولا أحلل أي أحد يسوي تعديل أو Modding في لعبتي بدون إذن 🚫</span>
+      </div>
+      
       <h1 class="hero-title">3rb tag VR</h1>
       <p class="hero-desc">أقوى لعبة عربية مخصصة لنظارات Meta Quest 3 & 3S.</p>
 
       <div class="stats-row">
-        <div class="support-banner-box">
-          دعمكم المستمر يساعدني على استمرار تطوير اللعبة وتقديمها لكم مجاناً ❤️
+        <div class="glass-card support-banner-box">
+          <i class="fa-solid fa-heart"></i>
+          <span>دعمكم المستمر يساعدني على استمرار تطوير اللعبة وتقديمها لكم مجاناً</span>
         </div>
         
-        <div class="stat-box">
+        <div class="glass-card stat-box">
           <div class="stat-val">v2.0</div>
           <div class="stat-lbl">الإصدار الحالي</div>
         </div>
@@ -213,39 +479,51 @@
     </section>
 
     <section class="actions-sidebar">
-      <div class="action-card">
+      <div class="glass-card action-card">
         
-        <!-- زر التحميل المباشر من GitHub Releases -->
         <button class="btn btn-primary" id="downloadBtn" onclick="handleDownload()">
-          <span id="btnText">🚀 تنزيل لعبة 3rb tag (APK)</span>
+          <i class="fa-solid fa-rocket"></i>
+          <span id="btnText">تنزيل لعبة 3rb tag (APK)</span>
         </button>
 
-        <!-- زر حساب التيك توك -->
         <a href="https://www.tiktok.com/@mbrmj_vr67" target="_blank" class="btn btn-tiktok">
-          <span>🎵 حسابي تيك (الدعم والمشاكل)</span>
+          <i class="fa-brands fa-tiktok"></i>
+          <span>حسابي تيك (الدعم والمشاكل)</span>
         </a>
 
-        <!-- زر ادعمني ☕ -->
         <a href="https://buymeacoffee.com/mbrmj_vr67" target="_blank" class="btn btn-support">
-          <span> ادعمني ❤</span>
+          <span>ادعمني ❤</span>
         </a>
 
         <div class="info-list">
-          <div class="info-item"><span>اسم الملف</span><span>3rb.tag.apk</span></div>
-          <div class="info-item"><span>حجم اللعبة</span><span>500 MB</span></div>
-          <div class="info-item"><span>الأجهزة المدعومة</span><span>Meta Quest 3 / 3S</span></div>
-          <div class="info-item"><span>المطور الرئيسي</span><span>mbrmj_vr67</span></div>
+          <div class="info-item">
+            <span><i class="fa-solid fa-file-code"></i> اسم الملف</span>
+            <span>3rb tag.apk</span>
+          </div>
+          <div class="info-item">
+            <span><i class="fa-solid fa-hard-drive"></i> الحجم الكامل</span>
+            <span>500 MB</span>
+          </div>
+          <div class="info-item">
+            <span><i class="fa-solid fa-vr-cardboard"></i> الأجهزة المدعومة</span>
+            <span>Meta Quest 3 / 3S</span>
+          </div>
+          <div class="info-item">
+            <span><i class="fa-solid fa-user-gear"></i> المطور الرئيسي</span>
+            <span>mbrmj_vr67</span>
+          </div>
         </div>
 
       </div>
     </section>
   </main>
 
-  <footer>تطوير وبرمجة mbrmj_vr67 © 2026</footer>
+  <footer>
+    تطوير وبرمجة <span>mbrmj_vr67</span> © 2026 - جميع الحقوق محفوظة
+  </footer>
 
   <script>
     function handleDownload() {
-      // توجيه التحميل مباشرة لـ GitHub Release لتنزيل 500MB بالكامل بدون أخطاء
       window.location.href = 'https://github.com/xyy1552/3rb-tag/releases/download/3rb-games/3rb.tag.apk';
     }
   </script>
