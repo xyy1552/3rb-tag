@@ -93,57 +93,13 @@
       100% { transform: translate(-60px, 60px) scale(1.2); opacity: 0.8; }
     }
 
-    /* Header Styling */
-    header {
-      width: 100%;
-      padding: 24px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(3, 0, 8, 0.6);
-      backdrop-filter: blur(25px);
-      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-      z-index: 100;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo-badge {
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: 1.4rem;
-      padding: 10px 22px;
-      border-radius: 14px;
-      box-shadow: 0 0 30px var(--glow-cyan), inset 0 0 10px rgba(255,255,255,0.5);
-      letter-spacing: 3px;
-      position: relative;
-      text-shadow: 0 0 8px rgba(0,0,0,0.8);
-    }
-
-    .logo-text {
-      font-size: 2rem;
-      font-weight: 1000;
-      letter-spacing: 2px;
-      background: linear-gradient(90deg, #ffffff, var(--neon-cyan), var(--neon-green));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px var(--glow-cyan));
-    }
-
     /* Main Grid Layout */
     main {
       flex: 1;
       width: 100%;
       max-width: 1450px;
       margin: 0 auto;
-      padding: 60px 40px;
+      padding: 30px 40px;
       display: grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 50px;
@@ -426,16 +382,13 @@
     @media (max-width: 1024px) {
       main {
         grid-template-columns: 1fr;
-        padding: 40px 24px;
+        padding: 24px;
       }
       .hero-title {
         font-size: 3.8rem;
       }
       .stats-row {
         grid-template-columns: 1fr;
-      }
-      header {
-        padding: 20px 24px;
       }
     }
   </style>
@@ -447,13 +400,6 @@
   <div class="glow-sphere glow-1"></div>
   <div class="glow-sphere glow-2"></div>
   <div class="glow-sphere glow-3"></div>
-
-  <header>
-    <div class="logo-container">
-      <div class="logo-badge">3RB</div>
-      <div class="logo-text">عرب تاق</div>
-    </div>
-  </header>
 
   <main>
     <section class="hero-section">
