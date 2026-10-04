@@ -92,7 +92,6 @@
 
     .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
 
-    /* شبكة المربعات (المستطيل المتصل للرسالة + مربع الإصدار) */
     .stats-row { 
       display: grid; 
       grid-template-columns: 2fr 1fr; 
@@ -100,7 +99,6 @@
       margin-bottom: 32px; 
     }
 
-    /* المستطيل المتصل بلون زر ادعمني */
     .support-banner-box {
       background: rgba(255, 221, 0, 0.08);
       border: 1px solid var(--coffee-orange);
@@ -153,7 +151,6 @@
     }
     .btn-tiktok:hover { transform: translateY(-4px); background: linear-gradient(135deg, var(--tiktok-pink), var(--tiktok-blue)); }
 
-    /* زر ادعمني ☕ */
     .btn-support {
       background: rgba(255, 221, 0, 0.1);
       border: 1.5px solid var(--coffee-orange);
@@ -204,12 +201,10 @@
       <p class="hero-desc">أقوى لعبة عربية مخصصة لنظارات Meta Quest 3 & 3S.</p>
 
       <div class="stats-row">
-        <!-- المستطيل المتصل الداعم بداخل الشبكة مع نفس لون زر ادعمني وإيموجي القلب -->
         <div class="support-banner-box">
           دعمكم المستمر يساعدني على استمرار تطوير اللعبة وتقديمها لكم مجاناً ❤️
         </div>
         
-        <!-- مربع الإصدار الحالي -->
         <div class="stat-box">
           <div class="stat-val">v2.0</div>
           <div class="stat-lbl">الإصدار الحالي</div>
@@ -220,7 +215,7 @@
     <section class="actions-sidebar">
       <div class="action-card">
         
-        <!-- زر التحميل المباشر -->
+        <!-- زر التحميل المباشر من GitHub Releases -->
         <button class="btn btn-primary" id="downloadBtn" onclick="handleDownload()">
           <span id="btnText">🚀 تنزيل لعبة 3rb tag (APK)</span>
         </button>
@@ -232,11 +227,12 @@
 
         <!-- زر ادعمني ☕ -->
         <a href="https://buymeacoffee.com/mbrmj_vr67" target="_blank" class="btn btn-support">
-          <span>☕ ادعمني ❤️️</span>
+          <span> ادعمني ❤</span>
         </a>
 
         <div class="info-list">
-          <div class="info-item"><span>اسم الملف</span><span>3rb tag.apk</span></div>
+          <div class="info-item"><span>اسم الملف</span><span>3rb.tag.apk</span></div>
+          <div class="info-item"><span>حجم اللعبة</span><span>500 MB</span></div>
           <div class="info-item"><span>الأجهزة المدعومة</span><span>Meta Quest 3 / 3S</span></div>
           <div class="info-item"><span>المطور الرئيسي</span><span>mbrmj_vr67</span></div>
         </div>
@@ -249,12 +245,8 @@
 
   <script>
     function handleDownload() {
-      const link = document.createElement('a');
-      link.href = './3rb tag.apk';
-      link.download = '3rb tag.apk';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // توجيه التحميل مباشرة لـ GitHub Release لتنزيل 500MB بالكامل بدون أخطاء
+      window.location.href = 'https://github.com/xyy1552/3rb-tag/releases/download/3rb-games/3rb.tag.apk';
     }
   </script>
 
